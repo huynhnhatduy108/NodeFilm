@@ -1,0 +1,28 @@
+{
+  "name": "nodefilm",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.10.9",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.6"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/huynhnhatduy108/NodeFilm.git"
+  },
+  "author": "Nhat Duy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/huynhnhatduy108/NodeFilm/issues"
+  },
+  "homepage": "https://github.com/huynhnhatduy108/NodeFilm#readme"
+}
