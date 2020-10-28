@@ -1,14 +1,26 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-const FilmSchema = new mongoose.Schema({
+const FilmSchema = new Schema({
   name: {
     type: String,
-    required: [true, 'Name is required']
+    required: [true, 'Name film is required']
   },
   description: {
     type: String,
-    required: [true, 'Created description is required']
-  }
+    required: [true, 'Description film is required']
+  },
+  price:{
+    type: Number,
+    required: [true, 'Price film is required']
+  },
+  image: {
+    type: String,
+  },
+  types:[{
+    type: Schema.Types.ObjectId,
+    ref:"type"
+    }]
 })
 
-module.exports = mongoose.model("Film",FilmSchema);
+module.exports = mongoose.model("film",FilmSchema);
