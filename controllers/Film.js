@@ -1,6 +1,7 @@
 const Film = require("./../models/film");
 const Type = require("./../models/type");
 const path = require('path');
+var {validationResult} = require('express-validator');
 
 
 // get list film
@@ -14,6 +15,7 @@ const getListFilm = async (req, res) => {
 
 // get film by id
 const getFilm = async (req, res) => {
+    // const errors = validationResult(req);
     const {id} = req.params;
     const film = await Film.findById(id);
     return res.status(200).json({         
@@ -24,6 +26,11 @@ const getFilm = async (req, res) => {
 
 //  create film
 const createFilm = async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      res.status(400).json({ errors: errors.array() });
+      return;
+    }
     const film = new Film(req.body);
     if(req.file){
         film.image = req.file.path;
@@ -39,6 +46,9 @@ const createFilm = async (req, res) => {
 const updateFilm = async (req, res) => {
     const {id} = req.params;
     const film = req.body;
+    if(req.file){
+        film.image = req.file.path;
+    }
     await Film.findByIdAndUpdate(id,film);
     return res.status(200).json({  
         success: true,
