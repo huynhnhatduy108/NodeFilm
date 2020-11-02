@@ -11,4 +11,10 @@ router.route('/:id')
     .put(typeController.updateType)
     .delete(typeController.deleteType)
 
+router.route('/:id/film')
+    .get(typeController.getFilmByType)
+    .post(typeController.addFilmToType)
+    .put(typeController.updateFilmForType)
+    .delete(typeController.deleteFilmForType)
+
 module.exports = router;

@@ -4,15 +4,15 @@ const Schema = mongoose.Schema;
 const FilmSchema = new Schema({
   name: {
     type: String,
-    required: [true, 'Name film is required']
+    // required: [true, 'Name film is required']
   },
   description: {
     type: String,
-    required: [true, 'Description film is required']
+    // required: [true, 'Description film is required']
   },
   price:{
     type: Number,
-    required: [true, 'Price film is required']
+    // required: [true, 'Price film is required']
   },
   image: {
     type: String,

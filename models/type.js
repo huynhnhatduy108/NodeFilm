@@ -1,11 +1,14 @@
 const mongoose = require('mongoose');
 
-const FilmSchema = new mongoose.Schema({
+const TypeSchema = new mongoose.Schema({
     name: {
         type: String,
         required: [true, 'Name film is required']
     },
     description: {
+        type: String,
+    },
+    keycode: {
         type: String,
     },
     films: [{
@@ -15,4 +18,4 @@ const FilmSchema = new mongoose.Schema({
 
 })
 
-module.exports = mongoose.model("type",FilmSchema);
+module.exports = mongoose.model("type",TypeSchema);

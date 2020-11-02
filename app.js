@@ -7,6 +7,7 @@ const logger = require("morgan");
 const filmRoute = require("./routes/film");
 const typeRoute = require("./routes/type");
 const userRoute = require("./routes/user");
+require('dotenv').config();
 
 
 // Middlewares
@@ -16,7 +17,7 @@ app.use(bodyParser.urlencoded({extended: true }));
 app.use("/uploads", express.static("uploads"));
 
 // connect mongoDB;
-const uri = "mongodb+srv://nodeapi:nodeapi@cluster0.wezhq.mongodb.net/node_api?retryWrites=true&w=majority";
+const uri = process.env.MONGODB_URI;
 mongoose.connect(uri,{useUnifiedTopology : true, useNewUrlParser :true}).then(() => {
     console.log("✅ MongoDB Connected successfully");
   })
@@ -53,7 +54,7 @@ app.use((err,req,res,next) => {
   });
 
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT,() => {
-    console.log(`Server is OK port ${PORT}!`);
+    console.log(`Server is OK port ${process.env.PORT}!`);
 })
