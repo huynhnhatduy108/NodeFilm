@@ -30,20 +30,20 @@ const validateTypeFilm = ()=>{
 //       body("password","password film is required"),
 //     ]; 
 // }
-// const validateRegister = ()=>{
-//   return [ 
-//       body('name', 'name film is required'),
-//       body('description','description film is required'),
-//       body('price', 'price film is required'),
-//       body('image', 'image film is required'),
-//     ]; 
-// }
-
+const validateSignin = ()=>{
+  return [ 
+      body('name', 'name user is required'),
+      body('username', 'username is required'),
+      body('email','email is required'),
+      body('password', 'password is required'),
+    ]; 
+}
 
 
 let validate = {
     checkId,
-    validateFilm
+    validateFilm,
+    validateSignin,
   };
   
   module.exports = {validate};

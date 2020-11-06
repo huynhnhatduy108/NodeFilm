@@ -59,11 +59,14 @@ const updateFilm = async (req, res) => {
       return;
     }
     const {id} = req.params;
-    const film = req.body;
+    const film = await Film.findById(id);
+
+    const filmUpate = req.body;
     if(req.file){
-        film.image = req.file.path;
+        filmUpate.image = req.file.path;
     }
-    await Film.findByIdAndUpdate(id,film);
+    filmUpate.types = film.types;
+    await Film.findByIdAndUpdate(id,filmUpate);
     return res.status(200).json({  
         success: true,
         message: "Update Film Success!"

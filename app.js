@@ -18,7 +18,7 @@ app.use("/uploads", express.static("uploads"));
 
 // connect mongoDB;
 const uri = process.env.MONGODB_URI;
-mongoose.connect(uri,{useUnifiedTopology : true, useNewUrlParser :true}).then(() => {
+mongoose.connect(uri,{useUnifiedTopology : true, useNewUrlParser :true,useCreateIndex: true}).then(() => {
     console.log("✅ MongoDB Connected successfully");
   })
   .catch(err => console.log("❌ Connection failed ",err));
