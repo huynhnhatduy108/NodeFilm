@@ -4,20 +4,15 @@ const bcrypt = require('bcryptjs');
 const UserSchema = new mongoose.Schema({
   name: {
     type: String,
-    // required: [true, 'Name is required']
-
   },
   username: {
     type: String,
     unique: true,
-
-    // required: [true, 'User Name is required']
   },
   email: {
     type: String,
     unique: true,
     lowercase: true,
-    // required: [true, 'Email is required']
   },
   password: {
     type:String,
@@ -43,7 +38,6 @@ const UserSchema = new mongoose.Schema({
 })
 UserSchema.pre("save", async function(next){
   try {
-
       if(this.authType !== "local") next();  
       // Generate a salt and hash of the password
       const salt = await bcrypt.genSalt(10);
