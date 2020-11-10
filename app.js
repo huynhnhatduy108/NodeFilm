@@ -29,7 +29,7 @@ app.get('/',(req,res,next) => {
 });
 
 //  Route Users
-app.use("/film", filmRoute);
+// app.use("/film", filmRoute);
 app.use("/type", typeRoute);
 app.use("/user", userRoute);
 
