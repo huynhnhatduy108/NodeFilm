@@ -3,15 +3,19 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser')
 const app = express();
 const logger = require("morgan");
+const cors = require('cors');
+
 
 const filmRoute = require("./routes/film");
 const typeRoute = require("./routes/type");
 const userRoute = require("./routes/user");
 require('dotenv').config();
+const {checkLogin, checkRole } = require("./middlewares/auth");
 
 
 // Middlewares
 app.use(logger("dev"));
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true }));
 app.use("/uploads", express.static("uploads"));
@@ -29,10 +33,9 @@ app.get('/',(req,res,next) => {
 });
 
 //  Route Users
-// app.use("/film", filmRoute);
-app.use("/type", typeRoute);
-app.use("/user", userRoute);
-
+app.use("/film", checkLogin, checkRole(), filmRoute);
+app.use("/type", checkLogin, checkRole(), typeRoute);
+app.use("/user", checkLogin, checkRole(), userRoute);
 
 
 // Catch 404 Error Page Not Found

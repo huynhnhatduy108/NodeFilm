@@ -1,5 +1,5 @@
 const router = require("express-promise-router")();
-const filmController = require("../controllers/film");
+const filmController = require("./../controllers/film");
 const upload = require("./../middlewares/upload");
 const { validate} = require("../helper/validate");
 

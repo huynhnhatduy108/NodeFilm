@@ -31,11 +31,13 @@ const UserSchema = new mongoose.Schema({
     default:null,
   },
   role:{
-    type:String,
-    enum:["user","admin"],
-    default:"user",
+    type:Number,
+    enum:[0,1,2],
+    default:0,
   }
 })
+
+
 UserSchema.pre("save", async function(next){
   try {
       if(this.authType !== "local") next();  

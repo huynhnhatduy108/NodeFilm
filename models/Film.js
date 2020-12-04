@@ -14,6 +14,9 @@ const FilmSchema = new Schema({
     type: Number,
     // required: [true, 'Price film is required']
   },
+  thumbnail:{
+    type: String,
+  },
   image: {
     type: String,
   },

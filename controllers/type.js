@@ -30,7 +30,8 @@ const createType = async (req, res) => {
     return res.status(201).json({ 
         success: true,
         message: "Create Type Film Success!",
-    })
+    }) 
+
 };
 
 // update type
