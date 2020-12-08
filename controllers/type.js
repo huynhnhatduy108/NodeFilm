@@ -48,6 +48,16 @@ const updateType = async (req, res) => {
 // delete type
 const deleteType = async (req, res) => {
     const {id} = req.params;
+    const films = await Film.find({});
+    films.map(async item => {
+        const film = await Film.findById(item._id);
+        const index = film.types.indexOf(id);
+        if(index > -1) {
+            film.types.splice(index, 1);
+        }
+        await film.save();
+    })
+    
     await Type.findByIdAndDelete(id);
     return res.status(200).json({  
         success: true,

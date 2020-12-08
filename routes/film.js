@@ -17,4 +17,7 @@ router.route('/:id/type')
     .get(filmController.getTypeFilm)
     .post(filmController.addTypeFilm)
 
+router.route('/upload')
+    .post(upload.single("image"),filmController.upload)
+
 module.exports = router;

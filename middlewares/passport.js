@@ -16,6 +16,9 @@ passport.use(
     async (payload, done) => {
       try {
          const {sub} = payload;
+         console.log("payload",payload);
+         console.log("sub",sub);
+
          const user = await User.findOne({username:sub});
          if(!user){
            return done(null, false);

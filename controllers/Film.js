@@ -11,10 +11,6 @@ const getListFilm = async (req, res) => {
 
   films.map(async (film) => {
     film.image = process.env.URL + film.image;
-    // film.types.map(async (type_id, index) => {
-    //   const type = await Type.findById(type_id);
-    //   return film.types[index] =type;
-    // });
   });
   return res.status(200).json({
     success: true,
@@ -34,9 +30,9 @@ const getFilm = async (req, res) => {
   film.image = process.env.URL + film.image;
   let types = [];
   const listType = film.types.map(async (type_id) => {
-    return await Type.findById(type_id);
-    // await types.push({ _id: type._id, name: type.name });
-    // console.log("types", types);
+    const type = await Type.findById(type_id);
+    await types.push({ _id: type._id, name: type.name });
+    console.log("types", types);
     // return type;
 
   });
@@ -55,9 +51,14 @@ const createFilm = async (req, res) => {
     res.status(400).json({ errors: errors.array() });
     return;
   }
- 
   const film = new Film(req.body);
-
+  // const {types} = req.body;
+  // types.map(async item =>{
+  //     const type = await Type.findById(item);
+  //     type.films.push(film._id);
+  //     await type.save();
+ 
+  // });
   if (req.file) {
     film.image = req.file.path;
   }
@@ -76,7 +77,22 @@ const updateFilm = async (req, res) => {
     return;
   }
   const { id } = req.params;
-  const film = await Film.findById(id);
+
+  //     // before update
+  // const film = await Film.findById(id);
+  // film.types.map(async type_id =>{
+  //   const type = await Type.findById(type_id);
+  //   const index = type.films.findIndex(id); 
+  //   type.films.splice(index, 1);
+  //   await type.save();
+  // });  
+  //     // after update
+  // const {types} = req.body;
+  // types.map(async item =>{
+  //     const type = await Type.findById(item);
+  //     type.films.push(id);
+  //     await type.save();
+  // });
 
   const filmUpate = req.body;
   if (req.file) {
@@ -99,18 +115,13 @@ const deleteFilm = async (req, res) => {
   }
   const { id } = req.params;
   // const film = await Film.findById(id);
-  // const {types} = film;
-  // types.map(async(type_id) =>{
-  //     const item = await Type.findById(type_id);
-  //     const {films} = item;
-  //     films.map(film => {
-  //         const index = films.indexOf(film);
-  //         if(index){
-  //             films.splice(index,1);
-  //         }
-  //     })
-  //     await item.save();
-  // })
+  // film.types.map(async type_id =>{
+  //   const type = await Type.findById(type_id);
+  //   const index = type.films.findIndex(id); 
+  //   type.films.splice(index, 1);
+  //   await type.save();
+  // }); 
+
   await Film.findByIdAndDelete(id);
   return res.status(200).json({
     success: true,
@@ -153,6 +164,15 @@ const getTypeFilm = async (req, res) => {
   });
 };
 
+const upload = async (req, res) => {
+  if (req.file) {
+    return res.status(201).json({
+      success: true,
+      message: "Upload Image Film Success!",
+    });
+  }
+}
+
 module.exports = {
   getListFilm,
   getFilm,
@@ -161,4 +181,5 @@ module.exports = {
   deleteFilm,
   addTypeFilm,
   getTypeFilm,
+  upload,
 };

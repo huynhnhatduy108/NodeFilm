@@ -6,7 +6,7 @@ const { JWT_TOKEN } = require("./../configs");
 const checkLogin = async (req, res, next) => {
      next();        
 
-        // const token = req.header('Authorization').replace('Bearer ', '');
+    //  const token = req.headers['authorization'];
         // const data = jwt.verify(token, JWT_TOKEN);
         // console.log("token",token);
         // const user = await User.findOne({ username: data.username});
