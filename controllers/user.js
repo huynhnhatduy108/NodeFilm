@@ -93,7 +93,6 @@ const authGoogle = async (req, res) => {
 const login = async (req, res) => {
   const { username, password } = req.body;
   const user = await findByCredentials(username, password);
-  console.log("user",user);
   if (!user) {
     return res.status(401).json({
         success: false,
@@ -105,6 +104,7 @@ const login = async (req, res) => {
   return res.status(200).json({
     success: true,
     token,
+    username,
     message: "Login success!",
   });
 };
@@ -125,6 +125,7 @@ const register = async (req, res) => {
   res.setHeader("Authorization", token);
   return res.status(201).json({
     success: true,
+    token,
     message: "Register success!",
   });
 };
